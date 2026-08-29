@@ -78,23 +78,23 @@ h2 em{font-style:italic;color:var(--gold)}
 
 /* ABOUT */
 .about{background:var(--bg)}
-.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(2rem,4vw,4rem);align-items:start}
-.about-photo{width:100%;display:block;border:1px solid var(--line);max-height:520px;object-fit:cover;object-position:center top}
-.role-card{background:var(--ink);color:#fff;padding:1.5rem;margin-top:1.25rem}
-.rc-label{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem;font-weight:600}
-.rc-role{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;margin-bottom:1rem;line-height:1.3}
-.rc-list{list-style:none;display:flex;flex-direction:column;gap:.45rem}
-.rc-list li{font-size:.78rem;color:rgba(255,255,255,.7);padding-left:1rem;position:relative;line-height:1.5}
-.rc-list li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:1px;background:var(--gold2)}
-.about-right{padding-top:.5rem;min-width:0}
-.about-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.5vw,2.6rem);font-weight:700;line-height:1.08;margin-bottom:1.25rem;color:var(--ink)}
+.about-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:clamp(2rem,3vw,3.5rem);align-items:start}
+.about-photo{width:100%;height:340px;display:block;border:1px solid var(--line);object-fit:cover;object-position:center top}
+.role-card{background:var(--ink);color:#fff;padding:1.35rem;margin-top:0}
+.rc-label{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:.45rem;font-weight:600}
+.rc-role{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;margin-bottom:.85rem;line-height:1.3}
+.rc-list{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.rc-list li{font-size:.75rem;color:rgba(255,255,255,.68);padding-left:.9rem;position:relative;line-height:1.45}
+.rc-list li::before{content:'';position:absolute;left:0;top:.55em;width:4px;height:1px;background:var(--gold2)}
+.about-right{padding-top:0;min-width:0}
+.about-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.2vw,2.4rem);font-weight:700;line-height:1.08;margin-bottom:1rem;color:var(--ink)}
 .about-title em{font-style:italic;color:var(--gold)}
-.about-body{font-size:.9rem;color:var(--dim);line-height:1.85;margin-bottom:1.75rem}
+.about-body{font-size:.88rem;color:var(--dim);line-height:1.85;margin-bottom:1.5rem}
 .about-body strong{color:var(--ink);font-weight:600}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.kpi{border-top:2px solid var(--gold);padding-top:1rem}
-.kpi-n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--ink);line-height:1}
-.kpi-l{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:.25rem}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.kpi{border-top:2px solid var(--gold);padding-top:.85rem}
+.kpi-n{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--ink);line-height:1}
+.kpi-l{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:.2rem}
 
 /* INTERACTIVE MAP */
 .voyage{background:var(--bg2)}
@@ -220,7 +220,7 @@ h2 em{font-style:italic;color:var(--gold)}
 
 /* CONTACT */
 .contact{background:var(--ink);color:#fff;position:relative;overflow:hidden}
-.contact-deck{position:absolute;inset:0;background:url('assets/deck-photo.jpg') center top/cover no-repeat;opacity:.1;z-index:0}
+.contact-deck{position:absolute;inset:0;background:url('assets/hero-uniform.jpg') center 20%/cover no-repeat;opacity:.1;z-index:0}
 .contact-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .contact-h{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,3.8vw,3.4rem);font-weight:700;line-height:1.04;margin-bottom:1.75rem;color:#fff}
 .contact-h em{font-style:italic;color:var(--gold2)}
@@ -241,35 +241,24 @@ footer{padding:1.5rem clamp(1.25rem,3vw,4rem);background:var(--bg3);border-top:1
 .rv{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
 .rv.in{opacity:1;transform:none}
 
-/* Large laptop — fix about overflow */
+/* Large laptop 1280px */
 @media(max-width:1280px){
-  nav{padding:1rem 2.5rem}
-  section{padding:5.5rem 2.5rem}
-  .hero-inner{padding:0 2.5rem 5rem}
-  .about-grid{gap:3rem}
-  .contact-grid{gap:3rem}
+  .about-grid{grid-template-columns:280px minmax(0,1fr)}
 }
-/* iPad landscape + small laptop (1024px) */
+/* iPad landscape + small laptop 1100px */
 @media(max-width:1100px){
-  nav{padding:1rem 2rem}
-  section{padding:5rem 2rem}
-  .hero-inner{padding:0 2rem 5rem}
   .unique-grid,.opps-grid{grid-template-columns:1fr 1fr}
-  .about-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem}
+  .about-grid{grid-template-columns:260px minmax(0,1fr);gap:2rem}
   .trans-cards,.skills-grid,.future-cols,.contact-grid{grid-template-columns:1fr}
   .storm-grid{grid-template-columns:1fr}
   .tl-wrap{position:static;max-width:420px}
   .zones{grid-template-columns:repeat(3,1fr)}
   #scroll-dots{display:none}
-  .about-title{font-size:clamp(1.5rem,2.5vw,2.2rem)}
 }
-/* iPad portrait (768px) */
+/* iPad portrait 900px */
 @media(max-width:900px){
-  nav{padding:.9rem 1.5rem}
-  section{padding:4.5rem 1.5rem}
-  .hero-inner{padding:0 1.5rem 4.5rem}
-  .about-grid{grid-template-columns:1fr}
-  .about-photo{max-height:420px}
+  .about-grid{grid-template-columns:1fr;max-width:540px}
+  .about-photo{height:300px}
   .unique-grid{grid-template-columns:1fr 1fr}
   .opps-grid{grid-template-columns:1fr}
   .zones{grid-template-columns:repeat(3,1fr)}
@@ -277,24 +266,21 @@ footer{padding:1.5rem clamp(1.25rem,3vw,4rem);background:var(--bg3);border-top:1
   .edu-grid{grid-template-columns:1fr}
   #scroll-dots{display:none}
 }
-/* Mobile (768px and below) */
+/* Mobile 768px */
 @media(max-width:768px){
-  nav{padding:.85rem 1.25rem}
   .nav-links{display:none}
-  section{padding:4rem 1.25rem}
-  .hero-inner{padding:0 1.25rem 4rem}
-  .hero-name{font-size:clamp(3rem,12vw,5rem)}
+  .hero-name{font-size:clamp(3rem,11vw,5rem)}
   .hero-nums{gap:1.5rem}
   .hero-nums .hn-num{font-size:2rem}
   h2{font-size:clamp(1.8rem,6vw,2.8rem)}
   .unique-grid,.opps-grid{grid-template-columns:1fr}
-  .about-grid{grid-template-columns:1fr}
-  .about-photo{max-height:360px}
+  .about-grid{grid-template-columns:1fr;max-width:100%}
+  .about-photo{height:280px}
   .kpis{grid-template-columns:1fr 1fr}
   .zones{grid-template-columns:1fr 1fr}
   .edu-grid{grid-template-columns:1fr}
   .trans-cards,.skills-grid,.future-cols,.contact-grid{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:.35rem;text-align:center;padding:1.25rem}
+  footer{flex-direction:column;gap:.35rem;text-align:center}
   #scroll-dots{display:none}
   .map-legend{flex-wrap:wrap;gap:.75rem}
   .storm-grid{grid-template-columns:1fr}
@@ -408,8 +394,8 @@ footer{padding:1.5rem clamp(1.25rem,3vw,4rem);background:var(--bg3);border-top:1
 <section class="about" id="about">
   <div class="inner">
     <div class="about-grid">
-      <div class="rv">
-        <img src="assets/hero-uniform.jpg" alt="Muskaan Sharma, Officer of the Watch">
+      <div class="rv" style="display:flex;flex-direction:column;gap:0">
+        <img src="assets/hero-uniform.jpg" alt="Muskaan Sharma, Officer of the Watch" class="about-photo">
         <div class="role-card">
           <div class="rc-label">Current Position</div>
           <div class="rc-role">3rd Officer, Officer of the Watch<br>Seaspan Dubai · Singapore Strait</div>
