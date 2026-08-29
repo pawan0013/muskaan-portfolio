@@ -7,437 +7,358 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:   #0f1e35;
-  --ink2:  #1a2e48;
-  --sea:   #0c7a70;
-  --sea2:  #0fa396;
-  --gold:  #b8943e;
-  --gold2: #d4ae5a;
-  --bg:    #f8f6f1;
-  --bg2:   #ffffff;
-  --bg3:   #f0ede6;
-  --text:  #1a1a2e;
-  --dim:   #5a6478;
-  --line:  #e0dbd2;
+:root{
+  --ink:#0f1e35;--ink2:#162840;--sea:#0c7a70;--sea2:#0fa396;
+  --gold:#b8943e;--gold2:#d4ae5a;--bg:#f8f6f1;--bg2:#ffffff;
+  --bg3:#f0ede6;--text:#1a1a2e;--dim:#5a6478;--line:#e0dbd2;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg2);
-  color:var(--text);
-  font-family:'Inter',sans-serif;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  line-height:1.6;
-}
+body{background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+
+/* TOP PROGRESS LINE */
+#top-line{position:fixed;top:0;left:0;z-index:9999;height:3px;width:0%;background:linear-gradient(to right,var(--sea),var(--gold));transition:width .1s linear}
 
 /* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 4rem;
-  background:rgba(248,246,241,0.95);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--line);
-  transition:all .3s ease;
-}
-.nav-logo{
-  font-family:'Playfair Display',serif;
-  font-size:1.1rem;font-weight:600;
-  color:var(--gold);letter-spacing:.08em;
-}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{
-  color:var(--dim);text-decoration:none;
-  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
-  transition:color .2s;
-}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(248,246,241,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--gold);letter-spacing:.08em}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{color:var(--dim);text-decoration:none;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;transition:color .2s;padding:.25rem 0;border-bottom:2px solid transparent}
 .nav-links a:hover{color:var(--sea)}
-.lang-row{display:flex;gap:.3rem}
-.lb{
-  background:none;border:1px solid var(--line);
-  color:var(--dim);padding:.25rem .6rem;
-  font-size:.65rem;letter-spacing:.08em;font-weight:500;
-  cursor:pointer;transition:all .2s;font-family:inherit;
-}
-.lb.on{background:var(--sea);border-color:var(--sea);color:#fff}
+.nav-links a.active{color:var(--ink);border-bottom-color:var(--gold)}
+.nav-cv{background:var(--sea);color:#fff;padding:.45rem 1.1rem;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-decoration:none;transition:background .2s}
+.nav-cv:hover{background:var(--sea2)}
+
+/* RIGHT SCROLL DOTS */
+#scroll-dots{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:400;display:flex;flex-direction:column;gap:.6rem}
+.sdot{width:8px;height:8px;border-radius:50%;background:rgba(15,30,53,.15);cursor:pointer;border:none;padding:0;transition:all .25s;position:relative}
+.sdot:hover,.sdot.on{background:var(--gold);transform:scale(1.4)}
+.sdot-tip{position:absolute;right:18px;top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font-size:.58rem;letter-spacing:.08em;padding:.2rem .55rem;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.sdot:hover .sdot-tip{opacity:1}
 
 /* HERO */
-.hero{
-  position:relative;min-height:100dvh;
-  display:flex;align-items:flex-end;overflow:hidden;
-  background:var(--ink);
-}
-.hero-video{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;opacity:.22;z-index:0;
-}
-.hero-grad{
-  position:absolute;inset:0;z-index:1;
-  background:linear-gradient(to top,rgba(15,30,53,1) 0%,rgba(15,30,53,.55) 50%,rgba(15,30,53,.1) 100%);
-}
-.hero-inner{
-  position:relative;z-index:2;
-  max-width:1280px;margin:0 auto;width:100%;
-  padding:0 4rem 5rem;
-}
-.hero-tag{
-  font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--gold2);margin-bottom:1.25rem;
-  display:flex;align-items:center;gap:.75rem;
-}
+.hero{position:relative;min-height:100dvh;display:flex;align-items:flex-end;overflow:hidden;background:var(--ink)}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22;z-index:0}
+.hero-grad{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(15,30,53,1) 0%,rgba(15,30,53,.5) 55%,rgba(15,30,53,.06) 100%)}
+.hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;width:100%;padding:0 4rem 5rem}
+.hero-tag{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
 .hero-tag::before{content:'';width:2rem;height:1px;background:var(--gold2)}
-.hero-name{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(4rem,8vw,8rem);
-  font-weight:700;line-height:.95;
-  letter-spacing:-.02em;color:#fff;margin-bottom:1.25rem;
-}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(4.5rem,8.5vw,9rem);font-weight:700;line-height:.92;letter-spacing:-.025em;color:#fff;margin-bottom:1.25rem}
 .hero-name em{font-style:italic;color:var(--gold2)}
-.hero-sub{
-  font-size:clamp(1rem,1.5vw,1.2rem);
-  color:rgba(255,255,255,.7);font-weight:300;
-  max-width:560px;line-height:1.75;margin-bottom:2.5rem;
-}
-.hero-nums{
-  display:flex;gap:3.5rem;flex-wrap:wrap;
-  border-top:1px solid rgba(255,255,255,.15);
-  padding-top:2rem;margin-bottom:2.5rem;
-}
-.hn-num{
-  font-family:'Playfair Display',serif;
-  font-size:2.6rem;font-weight:600;color:#fff;line-height:1;
-}
-.hn-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-top:.3rem}
+.hero-sub{font-size:clamp(1rem,1.5vw,1.15rem);color:rgba(255,255,255,.68);font-weight:300;max-width:520px;line-height:1.8;margin-bottom:2.5rem}
+.hero-nums{display:flex;gap:3rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:2rem;margin-bottom:2.5rem}
+.hn-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:#fff;line-height:1}
+.hn-label{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-top:.3rem}
 .hero-btns{display:flex;gap:.75rem;flex-wrap:wrap}
-.btn{
-  padding:.85rem 2rem;font-size:.8rem;font-weight:600;
-  letter-spacing:.05em;text-decoration:none;
-  transition:all .3s ease;border:1.5px solid transparent;
-  display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;
-}
-.btn-sea{background:var(--sea);color:#fff;border-color:var(--sea)}
-.btn-sea:hover{background:var(--sea2);border-color:var(--sea2)}
-.btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
-.btn-outline:hover{border-color:var(--gold2);color:var(--gold2)}
-.scroll-cue{
-  position:absolute;bottom:2rem;right:4rem;z-index:2;
-  writing-mode:vertical-rl;font-size:.6rem;letter-spacing:.22em;
-  text-transform:uppercase;color:rgba(255,255,255,.4);
-  display:flex;align-items:center;gap:.5rem;
-}
-.scroll-cue::after{content:'';width:1px;height:2.5rem;background:var(--gold);opacity:.5}
+.btn{padding:.9rem 2rem;font-size:.8rem;font-weight:600;letter-spacing:.05em;text-decoration:none;transition:all .25s ease;border:1.5px solid transparent;display:inline-flex;align-items:center;gap:.4rem}
+.btn-sea{background:var(--sea);color:#fff;border-color:var(--sea)}.btn-sea:hover{background:var(--sea2);border-color:var(--sea2)}
+.btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}.btn-outline:hover{border-color:var(--gold2);color:var(--gold2)}
+.scroll-cue{position:absolute;bottom:2rem;right:5rem;z-index:2;writing-mode:vertical-rl;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:.5rem}
+.scroll-cue::after{content:'';width:1px;height:2.5rem;background:var(--gold);opacity:.4}
 
 /* SECTIONS */
 section{padding:6rem 4rem}
 .inner{max-width:1280px;margin:0 auto}
-.s-tag{
-  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:.85rem;font-weight:600;
-}
-h2{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.2rem,4vw,3.6rem);
-  font-weight:700;line-height:1.05;
-  letter-spacing:-.02em;margin-bottom:.85rem;color:var(--ink);
-}
+.s-tag{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;font-weight:600}
+h2{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-weight:700;line-height:1.04;letter-spacing:-.02em;margin-bottom:.85rem;color:var(--ink)}
 h2 em{font-style:italic;color:var(--gold)}
-.s-sub{
-  color:var(--dim);font-size:1rem;font-weight:400;
-  max-width:560px;line-height:1.75;margin-bottom:3rem;
-}
+.s-sub{color:var(--dim);font-size:1rem;font-weight:400;max-width:560px;line-height:1.8;margin-bottom:3rem}
+
+/* UNIQUE */
+.unique{background:var(--ink);color:#fff}
+.unique h2{color:#fff}
+.unique-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08);margin-top:2.5rem}
+.u-card{background:var(--ink2);padding:2.5rem 2rem;border-bottom:3px solid transparent;transition:border-color .25s,background .25s}
+.u-card:hover{border-bottom-color:var(--gold);background:#1f3354}
+.u-icon{font-size:1.75rem;margin-bottom:1.1rem;opacity:.85}
+.u-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:#fff;margin-bottom:.75rem;line-height:1.2}
+.u-body{font-size:.85rem;color:rgba(255,255,255,.58);line-height:1.75}
+.u-body strong{color:var(--gold2)}
+.u-proof{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1);font-size:.7rem;color:var(--sea2);letter-spacing:.04em;line-height:1.5}
 
 /* ABOUT */
 .about{background:var(--bg)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start}
 .about-photo{width:100%;display:block;border:1px solid var(--line)}
-.role-card{
-  background:var(--ink);color:#fff;
-  padding:1.75rem;margin-top:1.5rem;
-}
-.rc-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem;font-weight:600}
-.rc-role{
-  font-family:'Playfair Display',serif;
-  font-size:1.1rem;font-weight:600;margin-bottom:1.1rem;line-height:1.3;
-}
-.rc-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.rc-list li{
-  font-size:.8rem;color:rgba(255,255,255,.75);
-  padding-left:1.1rem;position:relative;line-height:1.5;
-}
-.rc-list li::before{content:'';position:absolute;left:0;top:.55em;width:5px;height:1px;background:var(--gold2)}
-.about-right{padding-top:1rem}
-.about-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;
-  line-height:1.1;margin-bottom:1.5rem;color:var(--ink);
-}
+.role-card{background:var(--ink);color:#fff;padding:1.75rem;margin-top:1.25rem}
+.rc-label{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem;font-weight:600}
+.rc-role{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;margin-bottom:1rem;line-height:1.3}
+.rc-list{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.rc-list li{font-size:.8rem;color:rgba(255,255,255,.7);padding-left:1rem;position:relative;line-height:1.5}
+.rc-list li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:1px;background:var(--gold2)}
+.about-right{padding-top:.5rem}
+.about-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:700;line-height:1.08;margin-bottom:1.5rem;color:var(--ink)}
 .about-title em{font-style:italic;color:var(--gold)}
-.about-body{font-size:.95rem;color:var(--dim);line-height:1.85;margin-bottom:2rem}
+.about-body{font-size:.95rem;color:var(--dim);line-height:1.9;margin-bottom:2rem}
 .about-body strong{color:var(--ink);font-weight:600}
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
 .kpi{border-top:2px solid var(--gold);padding-top:1rem}
-.kpi-n{
-  font-family:'Playfair Display',serif;
-  font-size:2.2rem;font-weight:700;color:var(--ink);line-height:1;
-}
-.kpi-l{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:.25rem}
+.kpi-n{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--ink);line-height:1}
+.kpi-l{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:.25rem}
 
-/* VOYAGE */
+/* INTERACTIVE MAP */
 .voyage{background:var(--bg2)}
-.map-wrap{border:1px solid var(--line);overflow:hidden;margin-top:1rem}
-.map-wrap img{width:100%;display:block}
+.map-container{position:relative;margin-top:1rem;border:1px solid var(--line);overflow:hidden;cursor:default}
+.map-container img{width:100%;display:block}
+/* Clickable waypoints overlaid on the map */
+.map-wp{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:10}
+.wp-dot{width:14px;height:14px;border-radius:50%;background:var(--sea2);border:2px solid #fff;box-shadow:0 0 0 0 rgba(13,163,150,.5);animation:wpulse 2s infinite;transition:transform .2s}
+.wp-dot.danger{background:#c0392b;box-shadow:0 0 0 0 rgba(192,57,43,.5);animation:rpulse 2s infinite}
+.wp-dot.dest{background:var(--gold);border-color:#fff;width:18px;height:18px;animation:gpulse 2s infinite}
+@keyframes wpulse{0%{box-shadow:0 0 0 0 rgba(13,163,150,.5)}70%{box-shadow:0 0 0 8px rgba(13,163,150,0)}100%{box-shadow:0 0 0 0 rgba(13,163,150,0)}}
+@keyframes rpulse{0%{box-shadow:0 0 0 0 rgba(192,57,43,.5)}70%{box-shadow:0 0 0 8px rgba(192,57,43,0)}100%{box-shadow:0 0 0 0 rgba(192,57,43,0)}}
+@keyframes gpulse{0%{box-shadow:0 0 0 0 rgba(184,148,62,.6)}70%{box-shadow:0 0 0 10px rgba(184,148,62,0)}100%{box-shadow:0 0 0 0 rgba(184,148,62,0)}}
+.map-wp:hover .wp-dot{transform:scale(1.4)}
+.map-popup{display:none;position:absolute;background:#fff;border:1px solid var(--line);box-shadow:0 8px 32px rgba(0,0,0,.12);padding:1rem 1.25rem;min-width:200px;z-index:20;pointer-events:none}
+.map-wp:hover .map-popup,.map-wp.active .map-popup{display:block}
+.popup-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;font-weight:600}
+.popup-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.25rem}
+.popup-detail{font-size:.72rem;color:var(--dim);line-height:1.55}
+.popup-role{font-size:.7rem;color:var(--sea);margin-top:.3rem;font-weight:600}
+/* position popups to avoid overflow */
+.pop-right{left:20px;top:-10px}
+.pop-left{right:20px;top:-10px}
+.map-legend{display:flex;gap:1.5rem;margin-top:1rem;font-size:.72rem;color:var(--dim);align-items:center}
+.leg-item{display:flex;align-items:center;gap:.4rem}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
-/* SHIP */
+/* SHIP — interactive zones with pulse hints */
 .ship{background:var(--bg)}
-.ship-wrap{border:1px solid var(--line);overflow:hidden;margin-bottom:2rem}
-.ship-wrap img{width:100%;display:block}
+.ship-frame-wrap{position:relative;margin-bottom:2rem}
+.ship-frame-wrap img{width:100%;display:block;border:1px solid var(--line)}
+.ship-hint{position:absolute;top:.75rem;right:.75rem;background:rgba(15,30,53,.75);color:#fff;font-size:.65rem;letter-spacing:.08em;padding:.35rem .75rem;backdrop-filter:blur(4px)}
 .zones{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line)}
-.zone{
-  background:var(--bg2);padding:1.5rem 1.1rem;
-  transition:background .25s;cursor:default;
-}
+.zone{background:var(--bg2);padding:1.5rem 1.1rem;transition:all .25s;cursor:pointer;position:relative}
+.zone::after{content:'↓';position:absolute;bottom:.5rem;right:.75rem;font-size:.65rem;color:var(--gold);opacity:.5;transition:opacity .2s}
+.zone:hover::after{opacity:0}
 .zone:hover{background:var(--ink);color:#fff}
-.zone-n{
-  font-family:'Playfair Display',serif;
-  font-size:1.8rem;font-weight:700;color:var(--gold);
-  opacity:.4;margin-bottom:.4rem;line-height:1;
-}
-.zone:hover .zone-n{opacity:.7}
-.zone-name{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:.35rem}
+.zone-n{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--gold);opacity:.35;margin-bottom:.4rem;line-height:1}
+.zone:hover .zone-n{opacity:.6}
+.zone-name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:.35rem}
 .zone-sub{font-size:.75rem;color:var(--dim);line-height:1.5}
-.zone:hover .zone-sub{color:rgba(255,255,255,.6)}
-.zone-detail{
-  font-size:.72rem;color:var(--sea2);
-  margin-top:.75rem;padding-top:.75rem;
-  border-top:1px solid var(--line);
-  line-height:1.55;display:none;
-}
-.zone:hover .zone-detail{display:block;color:rgba(255,255,255,.75);border-top-color:rgba(255,255,255,.15)}
+.zone:hover .zone-sub{color:rgba(255,255,255,.55)}
+.zone-detail{font-size:.72rem;color:var(--sea2);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--line);line-height:1.55;display:none}
+.zone:hover .zone-detail{display:block;color:rgba(255,255,255,.75);border-top-color:rgba(255,255,255,.12)}
+
+/* OPPORTUNITIES — passenger/ferry visual cards */
+.opps{background:var(--ink);color:#fff}
+.opps h2{color:#fff}
+.opps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.opp-card{background:var(--ink2);border:1px solid rgba(255,255,255,.08);padding:2rem;transition:all .3s;position:relative;overflow:hidden}
+.opp-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,148,136,.12) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.opp-card:hover::before{opacity:1}
+.opp-card:hover{transform:translateY(-4px);border-color:rgba(13,163,150,.3)}
+.opp-img{font-size:3rem;margin-bottom:1.25rem;display:block}
+.opp-type{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sea2);margin-bottom:.5rem;font-weight:600}
+.opp-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:.75rem;line-height:1.2}
+.opp-body{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.75}
+.opp-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1.1rem}
+.opp-tag{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);border:1px solid rgba(201,168,74,.25);padding:.2rem .5rem}
 
 /* STORM */
 .storm{background:var(--bg2)}
-.storm-grid{display:grid;grid-template-columns:380px 1fr;gap:4rem;align-items:start}
+.storm-grid{display:grid;grid-template-columns:360px 1fr;gap:4rem;align-items:start}
 .tl-wrap{border:1px solid var(--line);overflow:hidden;position:sticky;top:5.5rem}
 .tl-wrap img{width:100%;display:block}
 .incidents{display:flex;flex-direction:column}
-.incident{
-  padding:1.75rem 0;
-  border-bottom:1px solid var(--line);
-  transition:padding-left .25s ease;
-}
+.incident{padding:1.75rem 0;border-bottom:1px solid var(--line);transition:padding-left .2s ease}
 .incident:first-child{border-top:1px solid var(--line)}
 .incident:hover{padding-left:.5rem}
-.inc-year{
-  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:.5rem;font-weight:600;
-}
-.inc-title{
-  font-family:'Playfair Display',serif;
-  font-size:1.2rem;font-weight:600;margin-bottom:.5rem;color:var(--ink);
-}
+.inc-year{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;font-weight:600}
+.inc-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;margin-bottom:.5rem;color:var(--ink)}
 .inc-body{font-size:.85rem;color:var(--dim);line-height:1.7}
+.inc-lesson{margin-top:.75rem;padding:.75rem 1rem;background:var(--bg);border-left:3px solid var(--sea);font-size:.78rem;color:var(--sea);line-height:1.6;font-weight:500}
 
 /* TRANSITION */
 .trans-sec{background:var(--bg)}
-.trans-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem}
+.trans-cards{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
 .ship-box{border:1px solid var(--line);padding:2rem;background:var(--bg2)}
-.sb-icon{font-size:2.2rem;margin-bottom:.75rem;opacity:.8}
-.sb-name{
-  font-family:'Playfair Display',serif;
-  font-size:1.2rem;font-weight:600;margin-bottom:.35rem;color:var(--ink);
-}
+.sb-icon{font-size:2rem;margin-bottom:.75rem;opacity:.8}
+.sb-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;margin-bottom:.35rem;color:var(--ink)}
 .sb-detail{font-size:.78rem;color:var(--dim);line-height:1.65}
-.skills-list{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
-.sk{
-  display:flex;align-items:flex-start;gap:.9rem;
-  padding:.9rem 1rem;background:var(--bg2);
-  border:1px solid var(--line);font-size:.82rem;
-  color:var(--dim);line-height:1.55;
-  transition:border-color .2s;
-}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.sk{display:flex;align-items:flex-start;gap:.85rem;padding:.9rem 1rem;background:var(--bg2);border:1px solid var(--line);font-size:.82rem;color:var(--dim);line-height:1.5;transition:border-color .2s}
 .sk:hover{border-color:var(--sea)}
-.sk-dot{width:6px;height:6px;border-radius:50%;background:var(--sea);flex-shrink:0;margin-top:.45em}
+.sk-dot{width:6px;height:6px;border-radius:50%;background:var(--sea);flex-shrink:0;margin-top:.42em}
 
 /* FUTURE */
 .future{background:var(--bg2)}
 .future-cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem}
-.fc-title{
-  font-family:'Playfair Display',serif;
-  font-size:1rem;font-weight:600;color:var(--gold);
-  margin-bottom:1.5rem;border-bottom:1px solid var(--line);padding-bottom:.75rem;
-}
-.fi{padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.fc-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--gold);margin-bottom:1.25rem;border-bottom:1px solid var(--line);padding-bottom:.75rem}
+.fi{padding:1rem 0;border-bottom:1px solid var(--line)}
 .fi:last-child{border-bottom:none}
-.fi-h{font-size:.85rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.fi-h{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
 .fi-b{font-size:.8rem;color:var(--dim);line-height:1.65}
-.future-quote{
-  grid-column:1/-1;
-  background:var(--ink);color:#fff;
-  padding:3rem 3.5rem;margin-top:1rem;
-}
-.fq{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.3rem,2.2vw,1.9rem);
-  font-weight:400;line-height:1.5;
-}
+.future-quote{grid-column:1/-1;background:var(--ink);color:#fff;padding:3rem 3.5rem;margin-top:1rem}
+.fq{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.2vw,2rem);font-weight:400;line-height:1.5}
 .fq em{font-style:italic;color:var(--gold2)}
 
-/* CREDS */
+/* CREDS with arrows + progress */
 .creds{background:var(--bg)}
-.certs-scroll{
-  display:flex;gap:1px;background:var(--line);
-  overflow-x:auto;margin-top:2rem;
-  scrollbar-width:thin;scrollbar-color:var(--gold) transparent;
-}
-.cert{
-  background:var(--bg2);padding:1.25rem 1.35rem;
-  min-width:195px;flex-shrink:0;
-  transition:background .2s;
-}
+.certs-wrap{position:relative;margin-top:2rem}
+.certs-viewport{overflow:hidden}
+.certs-track{display:flex;gap:1px;background:var(--line);transition:transform .35s cubic-bezier(.32,.72,0,1)}
+.cert{background:var(--bg2);padding:1.25rem 1.4rem;width:210px;flex-shrink:0;transition:background .2s}
 .cert:hover{background:var(--bg3)}
-.cert-iss{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sea);margin-bottom:.4rem;font-weight:600}
+.cert-iss{font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sea);margin-bottom:.4rem;font-weight:600}
 .cert-name{font-size:.8rem;font-weight:600;margin-bottom:.4rem;line-height:1.35;color:var(--ink)}
-.cert-exp{font-size:.68rem;color:var(--dim)}
+.cert-exp{font-size:.67rem;color:var(--dim)}
 .cert-exp.gld{color:var(--gold)}
+.cert-arrows{display:flex;gap:.5rem;align-items:center;margin-top:1rem}
+.cert-arrow{width:36px;height:36px;border:1px solid var(--line);background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;color:var(--ink)}
+.cert-arrow:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cert-progress-wrap{flex:1;height:3px;background:var(--line);border-radius:2px;position:relative}
+.cert-progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .35s ease;width:0%}
+.cert-counter{font-size:.65rem;color:var(--dim);letter-spacing:.08em;white-space:nowrap}
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin-top:2rem}
 .edu-card{background:var(--bg2);padding:2.5rem}
-.edu-score{
-  font-family:'Playfair Display',serif;
-  font-size:3.5rem;font-weight:700;color:var(--gold);line-height:1;
-}
-.edu-score-sub{font-size:.68rem;color:var(--dim);margin-bottom:1.1rem}
+.edu-score{font-family:'Playfair Display',serif;font-size:3.8rem;font-weight:700;color:var(--gold);line-height:1}
+.edu-score-sub{font-size:.68rem;color:var(--dim);margin-bottom:1rem}
 .edu-inst{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:.25rem}
 .edu-deg{font-size:.78rem;color:var(--dim);margin-bottom:1rem;line-height:1.5}
-.mention{
-  font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--sea);font-weight:600;
-  border-bottom:1.5px solid var(--sea);
-  padding-bottom:.15rem;display:inline-block;
-}
+.mention{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sea);font-weight:600;border-bottom:1.5px solid var(--sea);padding-bottom:.15rem;display:inline-block}
 
 /* CONTACT */
 .contact{background:var(--ink);color:#fff;position:relative;overflow:hidden}
-.contact-bg{
-  position:absolute;inset:0;
-  background-image:url('assets/deck-photo.jpg');
-  background-size:cover;background-position:center top;
-  opacity:.1;z-index:0;
-}
-.contact-grid{
-  position:relative;z-index:1;
-  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;
-}
-.contact-h{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,3.8vw,3.2rem);
-  font-weight:700;line-height:1.05;margin-bottom:1.75rem;color:#fff;
-}
+.contact-deck{position:absolute;inset:0;background:url('assets/deck-photo.jpg') center top/cover no-repeat;opacity:.1;z-index:0}
+.contact-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-h{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,3.8vw,3.4rem);font-weight:700;line-height:1.04;margin-bottom:1.75rem;color:#fff}
 .contact-h em{font-style:italic;color:var(--gold2)}
-.contact-note{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:1.5rem}
+.contact-note{font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.85;margin-bottom:1.5rem}
 .contact-note strong{color:#fff;font-weight:600}
-.rif{
-  border:1px solid rgba(255,255,255,.15);
-  padding:1.1rem 1.35rem;
-  font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.7;
-}
+.rif{border:1px solid rgba(255,255,255,.14);padding:1.1rem 1.35rem;font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.7}
 .rif strong{color:var(--gold2)}
 .contact-links{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.1)}
-.cl{
-  display:flex;align-items:center;gap:1rem;
-  background:rgba(255,255,255,.05);padding:1.1rem 1.35rem;
-  text-decoration:none;color:#fff;font-size:.82rem;
-  transition:background .2s;
-}
+.cl{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.05);padding:1.1rem 1.35rem;text-decoration:none;color:#fff;font-size:.82rem;transition:background .2s}
 .cl:hover{background:rgba(255,255,255,.1)}
-.cl-icon{
-  width:32px;height:32px;border:1px solid rgba(255,255,255,.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.78rem;flex-shrink:0;color:var(--gold2);
-}
-.cl-sub{font-size:.65rem;color:rgba(255,255,255,.45);margin-top:.1rem}
-.cv-btn{
-  background:var(--sea);padding:1.25rem 1.35rem;
-  display:flex;align-items:center;justify-content:space-between;
-  text-decoration:none;color:#fff;font-size:.85rem;font-weight:600;
-  transition:background .2s;letter-spacing:.03em;
-}
+.cl-icon{width:32px;height:32px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0;color:var(--gold2)}
+.cl-sub{font-size:.65rem;color:rgba(255,255,255,.4);margin-top:.1rem}
+.cv-btn{background:var(--sea);padding:1.25rem 1.35rem;display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:#fff;font-size:.85rem;font-weight:600;transition:background .2s;letter-spacing:.03em}
 .cv-btn:hover{background:var(--sea2)}
 
-/* FOOTER */
-footer{
-  padding:1.5rem 4rem;background:var(--bg3);
-  border-top:1px solid var(--line);
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:.65rem;color:var(--dim);letter-spacing:.06em;
-}
+footer{padding:1.5rem 4rem;background:var(--bg3);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:.65rem;color:var(--dim);letter-spacing:.06em}
 
-/* REVEAL */
 .rv{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
 .rv.in{opacity:1;transform:none}
 
-/* MOBILE */
-@media(max-width:1024px){
-  .about-grid,.trans-grid,.future-cols,.contact-grid{grid-template-columns:1fr}
-  .zones{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1100px){
+  .unique-grid,.opps-grid{grid-template-columns:1fr 1fr}
+  .about-grid,.trans-cards,.skills-grid,.future-cols,.contact-grid{grid-template-columns:1fr}
   .storm-grid{grid-template-columns:1fr}
   .tl-wrap{position:static;max-width:400px}
+  .zones{grid-template-columns:repeat(3,1fr)}
+  #scroll-dots{display:none}
 }
 @media(max-width:768px){
-  nav{padding:.9rem 1.25rem}
-  .nav-links{display:none}
-  section{padding:4rem 1.25rem}
-  .hero-inner{padding:0 1.25rem 4rem}
-  .zones{grid-template-columns:1fr 1fr}
-  .edu-grid{grid-template-columns:1fr}
+  nav{padding:.9rem 1.25rem}.nav-links{display:none}
+  section{padding:4rem 1.25rem}.hero-inner{padding:0 1.25rem 4.5rem}
+  .zones{grid-template-columns:1fr 1fr}.edu-grid,.kpis{grid-template-columns:1fr}
   footer{flex-direction:column;gap:.35rem;text-align:center;padding:1.25rem}
-  .hero-nums{gap:2rem}
-  .kpis{grid-template-columns:1fr 1fr}
+  .hero-nums{gap:2rem}.unique-grid,.opps-grid{grid-template-columns:1fr}
+  #scroll-dots{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<div id="top-line"></div>
+
+<div id="scroll-dots">
+  <button class="sdot on" onclick="goTo('hero')"><span class="sdot-tip">Home</span></button>
+  <button class="sdot" onclick="goTo('unique')"><span class="sdot-tip">Why Muskaan</span></button>
+  <button class="sdot" onclick="goTo('about')"><span class="sdot-tip">About</span></button>
+  <button class="sdot" onclick="goTo('voyage')"><span class="sdot-tip">Voyage</span></button>
+  <button class="sdot" onclick="goTo('ship')"><span class="sdot-tip">The Ship</span></button>
+  <button class="sdot" onclick="goTo('opps')"><span class="sdot-tip">Opportunities</span></button>
+  <button class="sdot" onclick="goTo('storm')"><span class="sdot-tip">The Storm</span></button>
+  <button class="sdot" onclick="goTo('future')"><span class="sdot-tip">Future</span></button>
+  <button class="sdot" onclick="goTo('credentials')"><span class="sdot-tip">Credentials</span></button>
+  <button class="sdot" onclick="goTo('contact')"><span class="sdot-tip">Contact</span></button>
+</div>
+
 <nav id="nav">
   <div class="nav-logo">M · S</div>
   <ul class="nav-links">
-    <li><a href="#about" data-en="About" data-fr="À propos">About</a></li>
-    <li><a href="#voyage" data-en="Voyage" data-fr="Voyage">Voyage</a></li>
-    <li><a href="#storm" data-en="The Storm" data-fr="La Tempête">The Storm</a></li>
-    <li><a href="#future" data-en="Future" data-fr="Futur">Future</a></li>
-    <li><a href="#credentials" data-en="Credentials" data-fr="Brevets">Credentials</a></li>
-    <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
+    <li><a href="#unique">Why Muskaan</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#voyage">Voyage</a></li>
+    <li><a href="#storm">The Storm</a></li>
+    <li><a href="#future">Future</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <div class="lang-row">
-    <button class="lb on" onclick="setLang('en',this)">EN</button>
-    <button class="lb" onclick="setLang('fr',this)">FR</button>
-  </div>
+  <a href="assets/Muskaan_Sharma_CV.pdf" class="nav-cv" download>Download CV</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <video class="hero-video" autoplay muted loop playsinline>
     <source src="assets/hero-video.mp4" type="video/mp4">
   </video>
   <div class="hero-grad"></div>
   <div class="hero-inner">
-    <div class="hero-tag rv" data-en="Officer of the Watch · Available Europe January 2027" data-fr="Officier de Quart · Disponible Europe Janvier 2027">Officer of the Watch · Available Europe January 2027</div>
+    <div class="hero-tag rv">Officer of the Watch · Available Paris, January 2027</div>
     <h1 class="hero-name rv">Muskaan<br><em>Sharma</em></h1>
-    <p class="hero-sub rv" data-en="Five vessels. Four oceans. Zero PSC deficiencies. Ready for Europe." data-fr="Cinq navires. Quatre océans. Zéro déficience PSC. Prête pour l'Europe.">Five vessels. Four oceans. Zero PSC deficiencies. Ready for Europe.</p>
+    <p class="hero-sub rv">Five vessels. Four oceans. The world's worst maritime decade navigated with zero PSC deficiencies. Now ready for Europe.</p>
     <div class="hero-nums rv">
-      <div><div class="hn-num">5</div><div class="hn-label" data-en="Vessels" data-fr="Navires">Vessels</div></div>
-      <div><div class="hn-num">0</div><div class="hn-label" data-en="PSC Deficiencies" data-fr="Déficiences PSC">PSC Deficiencies</div></div>
-      <div><div class="hn-num">9.4</div><div class="hn-label" data-en="University Grade" data-fr="Note Universitaire">University Grade</div></div>
-      <div><div class="hn-num">Jan 27</div><div class="hn-label" data-en="Available Europe" data-fr="Disponible Europe">Available Europe</div></div>
+      <div><div class="hn-num">5</div><div class="hn-label">Vessels</div></div>
+      <div><div class="hn-num">0</div><div class="hn-label">PSC Deficiencies</div></div>
+      <div><div class="hn-num">9.4</div><div class="hn-label">IMU Grade</div></div>
+      <div><div class="hn-num">Jan 27</div><div class="hn-label">Available</div></div>
     </div>
     <div class="hero-btns rv">
-      <a href="#contact" class="btn btn-sea" data-en="Get in Touch" data-fr="Me Contacter">Get in Touch</a>
-      <a href="assets/Muskaan_Sharma_CV.pdf" class="btn btn-outline" download data-en="Download CV" data-fr="Télécharger CV">Download CV</a>
+      <a href="#contact" class="btn btn-sea">Get in Touch</a>
+      <a href="assets/Muskaan_Sharma_CV.pdf" class="btn btn-outline" download>Download CV</a>
     </div>
   </div>
-  <div class="scroll-cue" data-en="Scroll" data-fr="Défiler">Scroll</div>
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<!-- WHY MUSKAAN -->
+<section class="unique" id="unique">
+  <div class="inner">
+    <div class="s-tag" style="color:var(--gold2)">Why Muskaan</div>
+    <h2>What sets her apart<br><em>from every other applicant.</em></h2>
+    <p class="s-sub" style="color:rgba(255,255,255,.55)">Any 3rd Officer can hold a watch. Very few can show this.</p>
+    <div class="unique-grid rv">
+      <div class="u-card">
+        <div class="u-icon">🎓</div>
+        <div class="u-title">India's top maritime graduate</div>
+        <div class="u-body">First Class with Distinction from Indian Maritime University, Chennai. <strong>9.4 out of 10</strong>, the French equivalent of Mention Très Bien.</div>
+        <div class="u-proof">GEIMS 8.9/10 · IMU 9.4/10 · Both with Distinction</div>
+      </div>
+      <div class="u-card">
+        <div class="u-icon">⚓</div>
+        <div class="u-title">Promoted ahead of her peers</div>
+        <div class="u-body">Holds a <strong>2nd Mate Certificate of Competency</strong> but is sailing as 3rd Officer. One rank above her current position. Accelerated career trajectory.</div>
+        <div class="u-proof">CoC IF 52338 · Valid until October 2030</div>
+      </div>
+      <div class="u-card">
+        <div class="u-icon">🛡️</div>
+        <div class="u-title">Zero PSC deficiencies, all contracts</div>
+        <div class="u-body">Not one deficiency across five vessels, multiple flag states and dozens of Port State Control inspections. <strong>The hardest metric to fake</strong> in maritime recruitment.</div>
+        <div class="u-proof">Verified across Seaspan Ship Management and Maersk Line</div>
+      </div>
+      <div class="u-card">
+        <div class="u-icon">🌏</div>
+        <div class="u-title">Singapore Strait solo watchkeeper</div>
+        <div class="u-body">Independent 4-hour watches through the world's most congested TSS. <strong>73 piracy incidents</strong> in her current operating waters in 2025. Not a simulator.</div>
+        <div class="u-proof">Seaspan Dubai · GRT 39,941 · Jul 2026 to present</div>
+      </div>
+      <div class="u-card">
+        <div class="u-icon">🚢</div>
+        <div class="u-title">Ultra-large containership experience</div>
+        <div class="u-body">Has sailed on Maersk vessels of <strong>GRT 113,042</strong>, top 0.1% globally by size. ISM internal audit experience directly applicable to Bureau Veritas and DNV.</div>
+        <div class="u-proof">Maersk Gibraltar · Maersk Genoa · GRT 113,042</div>
+      </div>
+      <div class="u-card">
+        <div class="u-icon">🇫🇷</div>
+        <div class="u-title">Paris-based from January 2027</div>
+        <div class="u-body">Partner already established in Les Lilas. Not a speculative relocation. <strong>France Talent Passport</strong> authorised. RIF endorsement confirmed by DGAMPA.</div>
+        <div class="u-proof">No labour market test · RIF confirmed · Les Lilas, Paris</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ABOUT -->
@@ -445,81 +366,210 @@ footer{
   <div class="inner">
     <div class="about-grid">
       <div class="rv">
-        <img src="assets/hero-uniform.jpg" alt="Muskaan Sharma" class="about-photo">
+        <img src="assets/hero-uniform.jpg" alt="Muskaan Sharma, Officer of the Watch">
         <div class="role-card">
-          <div class="rc-label" data-en="Current Position" data-fr="Poste Actuel">Current Position</div>
+          <div class="rc-label">Current Position</div>
           <div class="rc-role">3rd Officer, Officer of the Watch<br>Seaspan Dubai · Singapore Strait</div>
           <ul class="rc-list">
-            <li data-en="Promoted to OOW ahead of peers" data-fr="Promue OQB avant ses pairs">Promoted to OOW ahead of peers</li>
-            <li data-en="2nd Mate CoC, one rank above current role" data-fr="Brevet 2ème Officier, un rang au-dessus">2nd Mate CoC, one rank above current role</li>
-            <li data-en="Muster List authority, crew of 22" data-fr="Autorité rassemblement, équipage de 22">Muster List authority, crew of 22</li>
-            <li data-en="Zero PSC deficiencies across all contracts" data-fr="Zéro déficience PSC sur tous les contrats">Zero PSC deficiencies across all contracts</li>
-            <li data-en="Solo watch, Singapore Strait TSS" data-fr="Quart solo, TSS Détroit de Singapour">Solo watch, Singapore Strait TSS</li>
+            <li>Promoted to OOW ahead of peers</li>
+            <li>2nd Mate CoC held, one rank above current role</li>
+            <li>Muster List officer, crew of 22</li>
+            <li>Zero PSC deficiencies, all contracts</li>
+            <li>Solo 4-hour watches, Singapore Strait TSS</li>
           </ul>
         </div>
       </div>
       <div class="about-right rv">
-        <div class="s-tag" data-en="The Officer" data-fr="L'Officier">The Officer</div>
-        <h2 class="about-title" data-en="From India's seas<br>to <em>Europe's channels.</em>" data-fr="Des mers indiennes<br>aux <em>canaux européens.</em>">From India's seas<br>to <em>Europe's channels.</em></h2>
-        <p class="about-body" data-en="Deck Officer with <strong>4 years at sea</strong> across five international postings under Seaspan Ship Management and Maersk Line. Holds 2nd Mate CoC (Foreign Going), one rank above current position, with a <strong>zero-deficiency PSC record</strong> across all contracts.<br><br>Relocating to <strong>Paris (Les Lilas)</strong> in January 2027. French RIF endorsement confirmed achievable by DGAMPA. Work authorisation: France Talent Passport, no labour market test required." data-fr="Officier de pont avec <strong>4 ans en mer</strong> sur cinq postes internationaux sous Seaspan Ship Management et Maersk Line. Brevet de 2ème Officier Long Cours, un rang au-dessus du poste actuel, avec un bilan <strong>zéro déficience PSC</strong> sur tous les contrats.<br><br>Relocalisation à <strong>Paris (Les Lilas)</strong> en janvier 2027. Endossement RIF confirmé par DGAMPA. Passeport Talent France, sans test marché du travail.">Deck Officer with <strong>4 years at sea</strong> across five international postings under Seaspan Ship Management and Maersk Line. Holds 2nd Mate CoC (Foreign Going), one rank above current position, with a <strong>zero-deficiency PSC record</strong> across all contracts.<br><br>Relocating to <strong>Paris (Les Lilas)</strong> in January 2027. French RIF endorsement confirmed achievable by DGAMPA. Work authorisation: France Talent Passport, no labour market test required.</p>
+        <div class="s-tag">The Officer</div>
+        <h2 class="about-title">From India's seas<br>to <em>Europe's channels.</em></h2>
+        <p class="about-body">Deck Officer with <strong>4 years at sea</strong> across five international postings under Seaspan Ship Management (Vancouver) and Maersk Line. Holds 2nd Mate CoC (Foreign Going), one rank above current position, with a <strong>zero-deficiency PSC record</strong> across all contracts.<br><br>Relocating to <strong>Paris, Les Lilas</strong> in January 2027. French RIF endorsement confirmed achievable by DGAMPA. Work authorisation via France Talent Passport, no labour market test required.<br><br>Languages: English, professional. French, A1/A2, actively studying. Hindi, native.</p>
         <div class="kpis">
-          <div class="kpi"><div class="kpi-n">39,941</div><div class="kpi-l" data-en="GRT Current Vessel" data-fr="GRT Navire Actuel">GRT Current Vessel</div></div>
-          <div class="kpi"><div class="kpi-n">113,042</div><div class="kpi-l" data-en="GRT Largest Vessel" data-fr="GRT Plus Grand Navire">GRT Largest Vessel</div></div>
-          <div class="kpi"><div class="kpi-n">22</div><div class="kpi-l" data-en="Crew, Emergency Authority" data-fr="Équipage, Autorité Urgence">Crew, Emergency Authority</div></div>
-          <div class="kpi"><div class="kpi-n">2,700</div><div class="kpi-l">TEU Stability Reports</div></div>
+          <div class="kpi"><div class="kpi-n">39,941</div><div class="kpi-l">GRT Current Vessel</div></div>
+          <div class="kpi"><div class="kpi-n">113,042</div><div class="kpi-l">GRT Largest Vessel</div></div>
+          <div class="kpi"><div class="kpi-n">22</div><div class="kpi-l">Crew, Emergency Authority</div></div>
+          <div class="kpi"><div class="kpi-n">2,700</div><div class="kpi-l">TEU, Stability Reports</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VOYAGE -->
+<!-- INTERACTIVE MAP -->
 <section class="voyage" id="voyage">
   <div class="inner">
-    <div class="s-tag rv" data-en="The Voyage" data-fr="Le Voyage">The Voyage</div>
-    <h2 class="rv" data-en="Seven stops.<br><em>One destination.</em>" data-fr="Sept escales.<br><em>Une destination.</em>">Seven stops.<br><em>One destination.</em></h2>
-    <p class="s-sub rv" data-en="From Lonavala to the Singapore Strait. Each red marker is a crisis she navigated. Paris is the destination she chose." data-fr="De Lonavala au Détroit de Singapour. Chaque marqueur rouge, une crise traversée. Paris, la destination choisie.">From Lonavala to the Singapore Strait. Each red marker is a crisis she navigated. Paris is the destination she chose.</p>
-    <div class="map-wrap rv"><img src="assets/world-map.jpg" alt="Voyage map"></div>
+    <div class="s-tag rv">The Voyage</div>
+    <h2 class="rv">Seven stops.<br><em>One destination.</em></h2>
+    <p class="s-sub rv">Click any waypoint to explore each posting. Red markers indicate crisis zones she navigated through.</p>
+    <div class="map-container rv">
+      <img src="assets/world-map.jpg" alt="Voyage map" id="map-img">
+      <!-- Waypoints positioned as % of image dimensions -->
+      <div class="map-wp" style="left:65.5%;top:31%" onclick="this.classList.toggle('active')">
+        <div class="wp-dot dest"></div>
+        <div class="map-popup pop-left" style="bottom:25px;top:auto;right:20px">
+          <div class="popup-label">Destination · Jan 2027</div>
+          <div class="popup-title">Paris, France</div>
+          <div class="popup-detail">Les Lilas · Partner based here</div>
+          <div class="popup-role">Target: DFDS France · Bureau Veritas · DNV</div>
+        </div>
+      </div>
+      <div class="map-wp" style="left:78%;top:43%" onclick="this.classList.toggle('active')">
+        <div class="wp-dot danger"></div>
+        <div class="map-popup pop-left">
+          <div class="popup-label">Jun 2024 – Oct 2024</div>
+          <div class="popup-title">Maersk Gibraltar</div>
+          <div class="popup-detail">GRT 113,042 · Ultra-large containership</div>
+          <div class="popup-role">Cadet · ISM audit · PSC readiness</div>
+        </div>
+      </div>
+      <div class="map-wp" style="left:58%;top:42%" onclick="this.classList.toggle('active')">
+        <div class="wp-dot"></div>
+        <div class="map-popup pop-right">
+          <div class="popup-label">Jul 2022 – Mar 2023</div>
+          <div class="popup-title">Maersk Genoa</div>
+          <div class="popup-detail">GRT 113,042 · Atlantic and Asia routes</div>
+          <div class="popup-role">Cadet · ECDIS · ARPA · VDR operations</div>
+        </div>
+      </div>
+      <div class="map-wp" style="left:28%;top:44%" onclick="this.classList.toggle('active')">
+        <div class="wp-dot"></div>
+        <div class="map-popup pop-right">
+          <div class="popup-label">Jul 2023 – Feb 2024</div>
+          <div class="popup-title">Seaspan Empire</div>
+          <div class="popup-detail">GRT 54,940 · Pacific routes</div>
+          <div class="popup-role">Cadet · Passage planning · LSA maintenance</div>
+        </div>
+      </div>
+      <div class="map-wp" style="left:87%;top:57%" onclick="this.classList.toggle('active')">
+        <div class="wp-dot danger"></div>
+        <div class="map-popup pop-left">
+          <div class="popup-label">Jul 2026 – Present</div>
+          <div class="popup-title">Seaspan Dubai</div>
+          <div class="popup-detail">GRT 39,941 · Singapore Strait TSS</div>
+          <div class="popup-role">3rd Officer OOW · 73 piracy incidents nearby</div>
+        </div>
+      </div>
+      <div class="map-wp" style="left:82%;top:50%" onclick="this.classList.toggle('active')">
+        <div class="wp-dot"></div>
+        <div class="map-popup pop-left">
+          <div class="popup-label">Jan 2026 – Apr 2026</div>
+          <div class="popup-title">Seaspan Sydney</div>
+          <div class="popup-detail">GRT 39,941 · Pacific routes</div>
+          <div class="popup-role">3rd Officer OOW · Independent watchkeeping</div>
+        </div>
+      </div>
+      <div class="map-wp" style="left:83.5%;top:46%" onclick="this.classList.toggle('active')">
+        <div class="wp-dot" style="background:var(--gold);animation:gpulse 2s infinite"></div>
+        <div class="map-popup pop-left">
+          <div class="popup-label">Education · 2020–2021</div>
+          <div class="popup-title">GEIMS Lonavala</div>
+          <div class="popup-detail">Higher National Diploma · 8.9/10</div>
+          <div class="popup-role">Foundation of maritime career</div>
+        </div>
+      </div>
+      <div class="map-wp" style="left:84.5%;top:49%" onclick="this.classList.toggle('active')">
+        <div class="wp-dot" style="background:var(--gold);animation:gpulse 2s infinite"></div>
+        <div class="map-popup pop-left">
+          <div class="popup-label">Education · 2021–2024</div>
+          <div class="popup-title">IMU Chennai</div>
+          <div class="popup-detail">B.Sc. Nautical Science · 9.4/10</div>
+          <div class="popup-role">First Class with Distinction</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-legend rv">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--sea2)"></div>Vessel posting</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#c0392b"></div>Crisis zone active during contract</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--gold)"></div>Education or destination</div>
+      <div style="margin-left:auto;font-size:.7rem;color:var(--dim)">Click any marker to expand</div>
+    </div>
   </div>
 </section>
 
-<!-- SHIP -->
+<!-- SHIP — interactive -->
 <section class="ship" id="ship">
   <div class="inner">
-    <div class="s-tag rv" data-en="The Ship" data-fr="Le Navire">The Ship</div>
-    <h2 class="rv" data-en="She owns the whole vessel.<br><em>Not just the bridge.</em>" data-fr="Elle maîtrise l'ensemble du navire.<br><em>Pas seulement la passerelle.</em>">She owns the whole vessel.<br><em>Not just the bridge.</em></h2>
-    <p class="s-sub rv" data-en="Hover each zone to see her record there." data-fr="Survolez chaque zone pour voir ses résultats.">Hover each zone to see her record there.</p>
-    <div class="ship-wrap rv"><img src="assets/ship-diagram.jpg" alt="Containership cross-section"></div>
+    <div class="s-tag rv">The Ship</div>
+    <h2 class="rv">She owns the whole vessel.<br><em>Not just the bridge.</em></h2>
+    <p class="s-sub rv">Hover each zone below to reveal her specific record there.</p>
+    <div class="ship-frame-wrap rv">
+      <img src="assets/ship-diagram.jpg" alt="Containership cross-section">
+      <div class="ship-hint">Hover zones below for details</div>
+    </div>
     <div class="zones rv">
       <div class="zone">
         <div class="zone-n">01</div>
-        <div class="zone-name" data-en="Bridge" data-fr="Passerelle">Bridge</div>
-        <div class="zone-sub" data-en="Navigation and command" data-fr="Navigation et commandement">Navigation and command</div>
-        <div class="zone-detail" data-en="Solo 4-hour watches, Singapore Strait TSS. Sole COLREGS authority for collision avoidance." data-fr="Quarts solo 4h, TSS Détroit de Singapour. Seule autorité COLREG.">Solo 4-hour watches, Singapore Strait TSS. Sole COLREGS authority for collision avoidance.</div>
+        <div class="zone-name">Bridge</div>
+        <div class="zone-sub">Navigation and command</div>
+        <div class="zone-detail">Solo 4-hour watches, Singapore Strait TSS, world's most congested waterway. Sole COLREGS authority for collision avoidance and course alterations.</div>
       </div>
       <div class="zone">
         <div class="zone-n">02</div>
-        <div class="zone-name" data-en="Safety" data-fr="Sécurité">Safety</div>
-        <div class="zone-sub" data-en="Emergency and LSA" data-fr="Urgences et LSA">Emergency and LSA</div>
-        <div class="zone-detail" data-en="Muster List officer, crew of 22. Sole authority: fire, flooding, abandon ship. Designs all monthly drills." data-fr="Officier de rassemblement, 22 personnes. Seule autorité: incendie, voie d'eau, abandon.">Muster List officer, crew of 22. Sole authority: fire, flooding, abandon ship. Designs all monthly drills.</div>
+        <div class="zone-name">Safety</div>
+        <div class="zone-sub">Emergency and LSA</div>
+        <div class="zone-detail">Muster List officer, crew of 22. Sole authority for fire, flooding, abandon ship. Designs and leads all monthly emergency drills.</div>
       </div>
       <div class="zone">
         <div class="zone-n">03</div>
-        <div class="zone-name" data-en="Cargo" data-fr="Cargaison">Cargo</div>
-        <div class="zone-sub" data-en="Stowage and stability" data-fr="Arrimage et stabilité">Stowage and stability</div>
-        <div class="zone-detail" data-en="Stowage planning, ballast exchange, GM calculations. Formal stability reports, 2,700 TEU." data-fr="Planification arrimage, ballast, calculs GM. Rapports de stabilité, 2 700 EVP.">Stowage planning, ballast exchange, GM calculations. Formal stability reports, 2,700 TEU.</div>
+        <div class="zone-name">Cargo</div>
+        <div class="zone-sub">Stowage and stability</div>
+        <div class="zone-detail">Stowage planning, ballast exchange, GM calculations, cargo damage assessment. Formal stability reports on 2,700 TEU vessels.</div>
       </div>
       <div class="zone">
         <div class="zone-n">04</div>
-        <div class="zone-name" data-en="Chart Room" data-fr="Salle des Cartes">Chart Room</div>
-        <div class="zone-sub" data-en="Passage planning" data-fr="Planification voyage">Passage planning</div>
-        <div class="zone-detail" data-en="Admiralty Charts, NtM corrections, ECDIS routes. ISM internal audit on Maersk ULCVs." data-fr="Cartes Amirauté, NtM, ECDIS. Audit ISM interne sur ULCVs Maersk.">Admiralty Charts, NtM corrections, ECDIS routes. ISM internal audit on Maersk ULCVs.</div>
+        <div class="zone-name">Chart Room</div>
+        <div class="zone-sub">Passage planning</div>
+        <div class="zone-detail">Admiralty Charts, NtM corrections, ECDIS route database. ISM internal audit support on Maersk ULCVs, core Bureau Veritas and DNV competency.</div>
       </div>
       <div class="zone">
         <div class="zone-n">05</div>
-        <div class="zone-name" data-en="Deck" data-fr="Pont">Deck</div>
-        <div class="zone-sub" data-en="PSC and compliance" data-fr="PSC et conformité">PSC and compliance</div>
-        <div class="zone-detail" data-en="LSA and FFA compliance owner. Full SOLAS cycle. Zero PSC deficiencies, all inspections." data-fr="Responsable LSA et FFA. Cycle SOLAS complet. Zéro déficience PSC, toutes inspections.">LSA and FFA compliance owner. Full SOLAS cycle. Zero PSC deficiencies, all inspections.</div>
+        <div class="zone-name">Deck</div>
+        <div class="zone-sub">PSC and compliance</div>
+        <div class="zone-detail">LSA and FFA compliance owner. Full SOLAS certification cycle for lifeboats, rescue boats, fire suppression, immersion suits. Zero PSC deficiencies across all inspections.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITIES -->
+<section class="opps" id="opps">
+  <div class="inner">
+    <div class="s-tag" style="color:var(--gold2)">Opportunities in Europe</div>
+    <h2>Where she fits<br><em>in Europe's maritime world.</em></h2>
+    <p class="s-sub" style="color:rgba(255,255,255,.55)">Her profile qualifies for three distinct European maritime career tracks.</p>
+    <div class="opps-grid rv">
+      <div class="opp-card">
+        <span class="opp-img">⛴️</span>
+        <div class="opp-type">English Channel · Ferry Operations</div>
+        <div class="opp-title">DFDS France<br>Officier Polyvalent</div>
+        <div class="opp-body">Calais to Dover · Dieppe to Newhaven. 14 days on, 14 days off rotation. Passenger and freight ferry operations on one of Europe's busiest maritime corridors.</div>
+        <div class="opp-tags">
+          <span class="opp-tag">STCW II/1</span>
+          <span class="opp-tag">Passenger V/2</span>
+          <span class="opp-tag">RIF Confirmed</span>
+          <span class="opp-tag">Talent Passport</span>
+        </div>
+      </div>
+      <div class="opp-card">
+        <span class="opp-img">🌬️</span>
+        <div class="opp-type">North Sea · Offshore Wind</div>
+        <div class="opp-title">CTV Trainee Master<br>Offshore Wind</div>
+        <div class="opp-body">IJmuiden or Boulogne-sur-Mer base. Crew Transfer Vessels servicing offshore wind farms. Day rotation or 2-week-on/2-week-off schedule across the North Sea.</div>
+        <div class="opp-tags">
+          <span class="opp-tag">GWO Needed Jan 27</span>
+          <span class="opp-tag">OOW Experience</span>
+          <span class="opp-tag">FMTC IJmuiden</span>
+        </div>
+      </div>
+      <div class="opp-card">
+        <span class="opp-img">📋</span>
+        <div class="opp-type">Paris La Défense · Classification</div>
+        <div class="opp-title">Marine Surveyor<br>Bureau Veritas · DNV</div>
+        <div class="opp-body">La Défense, 40 minutes from Les Lilas. Shore-based classification and survey work. ISM audit experience from Maersk ULCVs directly maps to surveyor competencies.</div>
+        <div class="opp-tags">
+          <span class="opp-tag">ISM Audit Experience</span>
+          <span class="opp-tag">PSC Knowledge</span>
+          <span class="opp-tag">9.4 Academic Grade</span>
+        </div>
       </div>
     </div>
   </div>
@@ -528,36 +578,41 @@ footer{
 <!-- STORM -->
 <section class="storm" id="storm">
   <div class="inner">
-    <div class="s-tag rv" data-en="The Storm" data-fr="La Tempête">The Storm</div>
-    <h2 class="rv" data-en="The world's worst maritime decade.<br><em>She sailed through it.</em>" data-fr="La pire décennie maritime mondiale.<br><em>Elle l'a traversée.</em>">The world's worst maritime decade.<br><em>She sailed through it.</em></h2>
-    <p class="s-sub rv" data-en="Every major global crisis mapped to her active contracts." data-fr="Chaque grande crise mondiale sur ses contrats actifs.">Every major global crisis mapped to her active contracts.</p>
+    <div class="s-tag rv">The Storm</div>
+    <h2 class="rv">The world's worst maritime decade.<br><em>She sailed through it.</em></h2>
+    <p class="s-sub rv">Every major global crisis mapped to her active contracts. Zero deficiencies throughout.</p>
     <div class="storm-grid rv">
       <div class="tl-wrap"><img src="assets/timeline.jpg" alt="Incident timeline"></div>
       <div class="incidents">
         <div class="incident">
-          <div class="inc-year">2022 – 2023 · Maersk Genoa</div>
-          <div class="inc-title" data-en="COVID supply chain collapse" data-fr="Effondrement chaîne logistique COVID">COVID supply chain collapse</div>
-          <div class="inc-body" data-en="Port congestion at historic highs. She operates ECDIS and AIS across full ocean passages through the most volatile freight market in history." data-fr="Congestion portuaire historique. Elle opère ECDIS et AIS à travers le marché du fret le plus volatile de l'histoire.">Port congestion at historic highs. She operates ECDIS and AIS across full ocean passages through the most volatile freight market in history.</div>
+          <div class="inc-year">2022 to 2023 · Maersk Genoa</div>
+          <div class="inc-title">COVID supply chain collapse</div>
+          <div class="inc-body">Port congestion at historic highs. She operates ECDIS and AIS across full ocean passages through the most volatile freight market in history.</div>
+          <div class="inc-lesson">What she took from it: every schedule can be rewritten overnight. Adaptability without losing documentation discipline is the standard she set.</div>
         </div>
         <div class="incident">
           <div class="inc-year">Nov 2023 · Seaspan Empire</div>
-          <div class="inc-title" data-en="Red Sea Crisis, 90% collapse in Suez transits" data-fr="Crise Mer Rouge, effondrement 90% des transits Suez">Red Sea Crisis, 90% collapse in Suez transits</div>
-          <div class="inc-body" data-en="Houthis seize Galaxy Leader. Maersk suspends all Red Sea transits. Her next vessel, Maersk Gibraltar, is attacked by Houthis in December 2023. She joins it six months later." data-fr="Houthis saisissent le Galaxy Leader. Maersk suspend tous les transits. Son prochain navire, Maersk Gibraltar, est attaqué en décembre 2023.">Houthis seize Galaxy Leader. Maersk suspends all Red Sea transits. Her next vessel, Maersk Gibraltar, is attacked by Houthis in December 2023. She joins it six months later.</div>
+          <div class="inc-title">Red Sea Crisis, 90% collapse in Suez transits</div>
+          <div class="inc-body">Houthis seize Galaxy Leader. Maersk suspends all Red Sea transits. Her next vessel, Maersk Gibraltar, is attacked by Houthis in December 2023. She joins it six months later.</div>
+          <div class="inc-lesson">What she took from it: geopolitics reshapes routes overnight. An officer who understands voyage economics beyond waypoints is the one who will serve you.</div>
         </div>
         <div class="incident">
           <div class="inc-year">March 2024 · Maersk Gibraltar</div>
-          <div class="inc-title" data-en="MV Dali, one loose wire, six deaths" data-fr="MV Dali, un fil desserré, six morts">MV Dali, one loose wire, six deaths</div>
-          <div class="inc-body" data-en="Synergy Marine managed, Maersk chartered. A single wire caused blackout, loss of propulsion, bridge collapse. She owns LSA and FFA compliance on Seaspan Dubai. Zero deficiencies is not paperwork." data-fr="Géré par Synergy Marine, affrété par Maersk. Un seul fil : panne, perte de propulsion, effondrement du pont. Zéro déficience n'est pas de la bureaucratie.">Synergy Marine managed, Maersk chartered. A single wire caused blackout, loss of propulsion, bridge collapse. She owns LSA and FFA compliance on Seaspan Dubai. Zero deficiencies is not paperwork.</div>
+          <div class="inc-title">MV Dali, one loose wire, six deaths</div>
+          <div class="inc-body">Synergy Marine managed, Maersk chartered. A single wire caused blackout, loss of propulsion and bridge collapse. She owns LSA and FFA compliance on Seaspan Dubai.</div>
+          <div class="inc-lesson">What she took from it: zero deficiencies is not paperwork. It is the line between an ordinary voyage and a catastrophe.</div>
         </div>
         <div class="incident">
           <div class="inc-year">2025 · Seaspan Dubai</div>
-          <div class="inc-title" data-en="73 piracy incidents, her watch waters" data-fr="73 incidents de piraterie, ses eaux de quart">73 piracy incidents, her watch waters</div>
-          <div class="inc-body" data-en="Singapore Strait piracy surged to 73 incidents in 2025. She holds solo bridge watches in these exact waters, daily." data-fr="73 incidents de piraterie dans le Détroit de Singapour en 2025. Elle assure le quart seule dans ces eaux, quotidiennement.">Singapore Strait piracy surged to 73 incidents in 2025. She holds solo bridge watches in these exact waters, daily.</div>
+          <div class="inc-title">73 piracy incidents, her watch waters</div>
+          <div class="inc-body">Singapore Strait piracy surged to 73 incidents in 2025. She holds solo bridge watches in these exact waters, daily. Real-time threat assessment, not simulated.</div>
+          <div class="inc-lesson">What she took from it: situational awareness is a habit, not a mode. She is always in it.</div>
         </div>
         <div class="incident">
           <div class="inc-year">March 2025 · North Sea</div>
-          <div class="inc-title" data-en="OOW sentenced to 6 years in prison" data-fr="OQB condamné à 6 ans de prison">OOW sentenced to 6 years in prison</div>
-          <div class="inc-body" data-en="MV Solong collision. The officer of the watch went to prison. Not the company. Not the Master. The OOW. She carries that on every watch. It is why her record is clean." data-fr="Collision MV Solong. L'officier de quart est allé en prison. Pas la compagnie. Pas le Commandant. Elle porte cela à chaque quart.">MV Solong collision. The officer of the watch went to prison. Not the company. Not the Master. The OOW. She carries that on every watch. It is why her record is clean.</div>
+          <div class="inc-title">Officer of the Watch sentenced to 6 years</div>
+          <div class="inc-body">MV Solong collision. The officer of the watch went to prison. Not the company. Not the Master. The OOW. She carries that accountability on every watch.</div>
+          <div class="inc-lesson">What she took from it: the weight of the watch. It is why her record is clean.</div>
         </div>
       </div>
     </div>
@@ -567,34 +622,28 @@ footer{
 <!-- TRANSITION -->
 <section class="trans-sec" id="transition">
   <div class="inner">
-    <div class="s-tag rv" data-en="The Transition" data-fr="La Transition">The Transition</div>
-    <h2 class="rv" data-en="From open ocean<br>to <em>the English Channel.</em>" data-fr="De l'océan ouvert<br>à <em>la Manche.</em>">From open ocean<br>to <em>the English Channel.</em></h2>
-    <p class="s-sub rv" data-en="The skills transfer exactly. No approximations." data-fr="Les compétences se transfèrent exactement. Sans approximations.">The skills transfer exactly. No approximations.</p>
-    <div class="trans-grid rv">
-      <div>
-        <div class="ship-box">
-          <div class="sb-icon">🚢</div>
-          <div class="sb-name" data-en="Containership OOW" data-fr="OQB Porte-conteneurs">Containership OOW</div>
-          <div class="sb-detail">Seaspan Dubai · GRT 39,941<br>Singapore Strait TSS · 2,700 TEU</div>
-        </div>
-        <div style="margin-top:1rem">
-        <div class="ship-box">
-          <div class="sb-icon">⛴️</div>
-          <div class="sb-name" data-en="Ferry Lieutenant" data-fr="Lieutenant Ferry">Ferry Lieutenant</div>
-          <div class="sb-detail">DFDS France · Calais to Dover<br>Dieppe to Newhaven · 14 on / 14 off</div>
-        </div>
-        </div>
+    <div class="s-tag rv">The Transition</div>
+    <h2 class="rv">From open ocean<br>to <em>the English Channel.</em></h2>
+    <p class="s-sub rv">The skills transfer exactly. No approximations.</p>
+    <div class="trans-cards rv">
+      <div class="ship-box">
+        <div class="sb-icon">🚢</div>
+        <div class="sb-name">Containership OOW</div>
+        <div class="sb-detail">Seaspan Dubai · GRT 39,941<br>Singapore Strait TSS · 2,700 TEU</div>
       </div>
-      <div>
-        <div class="s-tag" data-en="What transfers" data-fr="Ce qui se transfère">What transfers</div>
-        <div class="skills-list">
-          <div class="sk"><div class="sk-dot"></div><span data-en="Independent watchkeeping transfers directly to Channel approaches and ferry bridge" data-fr="Le quart indépendant se transfère directement aux approches Manche et pont ferry">Independent watchkeeping transfers directly to Channel approaches and ferry bridge</span></div>
-          <div class="sk"><div class="sk-dot"></div><span data-en="Emergency command authority maps exactly to passenger vessel safety requirements" data-fr="L'autorité de commandement d'urgence correspond exactement à la sécurité des navires à passagers">Emergency command authority maps exactly to passenger vessel safety requirements</span></div>
-          <div class="sk"><div class="sk-dot"></div><span data-en="Zero PSC record satisfies the strictest French and UK flag state compliance requirements" data-fr="Zéro déficience PSC satisfait les exigences de conformité françaises et britanniques">Zero PSC record satisfies the strictest French and UK flag state compliance requirements</span></div>
-          <div class="sk"><div class="sk-dot"></div><span data-en="ISM internal audit experience from Maersk ULCVs is core Bureau Veritas and DNV competency" data-fr="Audit ISM interne sur ULCVs Maersk est une compétence centrale BV et DNV">ISM internal audit experience from Maersk ULCVs is core Bureau Veritas and DNV competency</span></div>
-          <div class="sk"><div class="sk-dot"></div><span data-en="Passenger Familiarisation STCW V/2 already held, RoPax-ready from day one" data-fr="Familiarisation Passagers STCW V/2 déjà obtenu, prête RoPax dès le premier jour">Passenger Familiarisation STCW V/2 already held, RoPax-ready from day one</span></div>
-        </div>
+      <div class="ship-box">
+        <div class="sb-icon">⛴️</div>
+        <div class="sb-name">Ferry Lieutenant</div>
+        <div class="sb-detail">DFDS France · Calais to Dover<br>Dieppe to Newhaven · 14 on, 14 off</div>
       </div>
+    </div>
+    <div class="skills-grid rv">
+      <div class="sk"><div class="sk-dot"></div><span>Independent watchkeeping transfers directly to Channel approaches and ferry bridge</span></div>
+      <div class="sk"><div class="sk-dot"></div><span>Emergency command authority maps exactly to passenger vessel safety requirements</span></div>
+      <div class="sk"><div class="sk-dot"></div><span>Zero PSC record satisfies French and UK flag state compliance requirements</span></div>
+      <div class="sk"><div class="sk-dot"></div><span>ISM internal audit experience from Maersk ULCVs is core BV and DNV competency</span></div>
+      <div class="sk"><div class="sk-dot"></div><span>Passenger Familiarisation STCW V/2 already held, RoPax-ready from day one</span></div>
+      <div class="sk"><div class="sk-dot"></div><span>RIF endorsement of Indian CoC confirmed by DGAMPA, employer submits on hire</span></div>
     </div>
   </div>
 </section>
@@ -602,63 +651,75 @@ footer{
 <!-- FUTURE -->
 <section class="future" id="future">
   <div class="inner">
-    <div class="s-tag rv" data-en="The Future" data-fr="Le Futur">The Future</div>
-    <h2 class="rv" data-en="AI augments the officer.<br><em>It doesn't replace her.</em>" data-fr="L'IA augmente l'officier.<br><em>Elle ne la remplace pas.</em>">AI augments the officer.<br><em>It doesn't replace her.</em></h2>
+    <div class="s-tag rv">The Future</div>
+    <h2 class="rv">AI augments the officer.<br><em>It does not replace her.</em></h2>
     <div class="future-cols rv">
       <div>
-        <div class="fc-title" data-en="What the industry faces" data-fr="Ce que l'industrie affronte">What the industry faces</div>
-        <div class="fi"><div class="fi-h">IMO MASS Code 2026</div><div class="fi-b" data-en="Autonomous ship framework finalising. Mandatory by 2032. Officers who understand human-machine boundaries are the priority hire." data-fr="Cadre navires autonomes en finalisation. Obligatoire en 2032. Les officiers qui comprennent la frontière humain-machine sont prioritaires.">Autonomous ship framework finalising. Mandatory by 2032. Officers who understand human-machine boundaries are the priority hire.</div></div>
-        <div class="fi"><div class="fi-h" data-en="EU FuelEU Maritime, January 2026" data-fr="EU FuelEU Maritime, Janvier 2026">EU FuelEU Maritime, January 2026</div><div class="fi-b" data-en="Every European port call now carries a carbon cost. Route optimisation is financial, not just navigational." data-fr="Chaque escale européenne a un coût carbone. L'optimisation des routes est financière, pas seulement navigatoire.">Every European port call now carries a carbon cost. Route optimisation is financial, not just navigational.</div></div>
-        <div class="fi"><div class="fi-h" data-en="260 vessel collisions in 2025" data-fr="260 collisions de navires en 2025">260 vessel collisions in 2025</div><div class="fi-b" data-en="75 to 96% caused by human error. Demand for trained, systems-aware officers is rising." data-fr="75 à 96% causées par erreur humaine. La demande d'officiers formés augmente.">75 to 96% caused by human error. Demand for trained, systems-aware officers is rising.</div></div>
+        <div class="fc-title">What the industry faces</div>
+        <div class="fi"><div class="fi-h">IMO MASS Code 2026</div><div class="fi-b">Autonomous ship framework finalising. Mandatory by 2032. Officers who understand the human-machine boundary are the priority hire.</div></div>
+        <div class="fi"><div class="fi-h">EU FuelEU Maritime, January 2026</div><div class="fi-b">Every European port call now carries a carbon cost. Route optimisation is financial, not just navigational.</div></div>
+        <div class="fi"><div class="fi-h">260 vessel collisions in 2025</div><div class="fi-b">75 to 96 percent caused by human error. Demand for trained, systems-aware officers is rising.</div></div>
       </div>
       <div>
-        <div class="fc-title" data-en="Where she stands" data-fr="Sa position">Where she stands</div>
-        <div class="fi"><div class="fi-h" data-en="Already operating the AI-integrated bridge" data-fr="Déjà à la passerelle intégrée IA">Already operating the AI-integrated bridge</div><div class="fi-b" data-en="ECDIS Maris and Furuno, ARPA, AIS, VDR. The exact sensor layer autonomous systems use. She supervises them." data-fr="ECDIS Maris et Furuno, ARPA, AIS, VDR. La couche exacte qu'utilisent les systèmes autonomes. Elle les supervise.">ECDIS Maris and Furuno, ARPA, AIS, VDR. The exact sensor layer autonomous systems use. She supervises them.</div></div>
-        <div class="fi"><div class="fi-h" data-en="ISM audit experience, Maersk ULCVs" data-fr="Expérience audit ISM, ULCVs Maersk">ISM audit experience, Maersk ULCVs</div><div class="fi-b" data-en="Reviewed Safety Management System documentation, identified procedural gaps. Core BV and DNV surveyor competency." data-fr="Documentation SMS examinée, écarts procéduraux identifiés. Compétence centrale BV et DNV.">Reviewed Safety Management System documentation, identified procedural gaps. Core BV and DNV surveyor competency.</div></div>
-        <div class="fi"><div class="fi-h" data-en="French RIF endorsement confirmed by DGAMPA" data-fr="Endossement RIF confirmé par DGAMPA">French RIF endorsement confirmed by DGAMPA</div><div class="fi-b" data-en="Indian CoC recognisable under French flag. Employer submits on hire. No regulatory barrier." data-fr="Brevet indien reconnaissable sous pavillon français. L'armateur soumet à l'embauche. Pas de barrière réglementaire.">Indian CoC recognisable under French flag. Employer submits on hire. No regulatory barrier.</div></div>
+        <div class="fc-title">Where she stands</div>
+        <div class="fi"><div class="fi-h">Already operating the AI-integrated bridge</div><div class="fi-b">ECDIS Maris and Furuno, ARPA, AIS, VDR. The exact sensor layer autonomous systems use. She supervises them.</div></div>
+        <div class="fi"><div class="fi-h">ISM audit experience, Maersk ultra-large containerships</div><div class="fi-b">Reviewed SMS documentation, identified procedural gaps. Core Bureau Veritas and DNV competency.</div></div>
+        <div class="fi"><div class="fi-h">RIF endorsement confirmed, no regulatory barrier</div><div class="fi-b">Indian CoC recognisable under French flag. Employer submits on hire. DFDS France handles this process.</div></div>
       </div>
       <div class="future-quote">
-        <div class="fq" data-en="The ships of 2030 will be smarter. They will still need an officer who can make the right call at <em>0130 in Baltimore Harbour</em> when the screens go dark." data-fr="Les navires de 2030 seront plus intelligents. Ils auront toujours besoin d'un officier capable de prendre la bonne décision à <em>01h30 dans le port de Baltimore</em> quand les écrans s'éteignent.">The ships of 2030 will be smarter. They will still need an officer who can make the right call at <em>0130 in Baltimore Harbour</em> when the screens go dark.</div>
+        <div class="fq">The ships of 2030 will be smarter. They will still need an officer who can make the right call at <em>0130 in Baltimore Harbour</em> when the screens go dark.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CREDENTIALS -->
+<!-- CREDENTIALS with arrow navigation -->
 <section class="creds" id="credentials">
   <div class="inner">
-    <div class="s-tag rv" data-en="Credentials" data-fr="Brevets">Credentials</div>
-    <h2 class="rv" data-en="The papers<br><em>are in order.</em>" data-fr="Les documents<br><em>sont en ordre.</em>">The papers<br><em>are in order.</em></h2>
-    <div class="certs-scroll rv">
-      <div class="cert"><div class="cert-iss">DG Shipping India</div><div class="cert-name" data-en="CoC 2nd Mate (Foreign Going)" data-fr="Brevet 2ème Officier Long Cours">CoC 2nd Mate (Foreign Going)</div><div class="cert-exp">IF 52338 · Oct 2030</div></div>
-      <div class="cert"><div class="cert-iss">DG Shipping India</div><div class="cert-name">GMDSS GOC</div><div class="cert-exp">GMDSSDEL25020389 · Sep 2030</div></div>
-      <div class="cert"><div class="cert-iss">DGS Approved MTI</div><div class="cert-name">ECDIS: Maris + Furuno</div><div class="cert-exp gld" data-en="Lifetime" data-fr="À vie">Lifetime</div></div>
-      <div class="cert"><div class="cert-iss">CMTN MTI 105023</div><div class="cert-name" data-en="Advanced Fire Fighting STCW A-VI/3" data-fr="Lutte Incendie Avancée A-VI/3">Advanced Fire Fighting STCW A-VI/3</div><div class="cert-exp" data-en="No expiry" data-fr="Sans expiration">No expiry</div></div>
-      <div class="cert"><div class="cert-iss">CMTN MTI 105023</div><div class="cert-name" data-en="Medical First Aid STCW A-VI/4-1" data-fr="Premiers Secours A-VI/4-1">Medical First Aid STCW A-VI/4-1</div><div class="cert-exp" data-en="No expiry" data-fr="Sans expiration">No expiry</div></div>
-      <div class="cert"><div class="cert-iss">DGS Approved MTI</div><div class="cert-name" data-en="Passenger Familiarisation STCW V/2" data-fr="Familiarisation Passagers V/2">Passenger Familiarisation STCW V/2</div><div class="cert-exp" data-en="No expiry" data-fr="Sans expiration">No expiry</div></div>
-      <div class="cert"><div class="cert-iss">CMTN MTI 105023</div><div class="cert-name">PSCRB STCW A-VI/2</div><div class="cert-exp">Jun 2030</div></div>
-      <div class="cert"><div class="cert-iss">GEIMS MTI 202009</div><div class="cert-name" data-en="Security Designated Duties A-VI/6-2" data-fr="Sécurité Fonctions Désignées A-VI/6-2">Security Designated Duties A-VI/6-2</div><div class="cert-exp" data-en="No expiry" data-fr="Sans expiration">No expiry</div></div>
-      <div class="cert"><div class="cert-iss">ADU Academy India</div><div class="cert-name" data-en="PSSR Amendment 2026" data-fr="Amendement PSSR 2026">PSSR Amendment 2026</div><div class="cert-exp" data-en="No expiry" data-fr="Sans expiration">No expiry</div></div>
-      <div class="cert"><div class="cert-iss">DGS Approved MTI</div><div class="cert-name" data-en="ARPA / Radar Operator" data-fr="Opérateur ARPA / Radar">ARPA / Radar Operator</div><div class="cert-exp gld" data-en="Lifetime" data-fr="À vie">Lifetime</div></div>
-      <div class="cert"><div class="cert-iss">DGS Medical Examiner</div><div class="cert-name" data-en="Seafarer Medical Certificate" data-fr="Certificat Médical Navigant">Seafarer Medical Certificate</div><div class="cert-exp" data-en="Current 2026" data-fr="En cours 2026">Current 2026</div></div>
-      <div class="cert"><div class="cert-iss">DG Shipping India</div><div class="cert-name" data-en="Continuous Discharge Certificate" data-fr="Livret Maritime CDC">Continuous Discharge Certificate</div><div class="cert-exp">MUM 463043 · May 2032</div></div>
+    <div class="s-tag rv">Credentials</div>
+    <h2 class="rv">The papers<br><em>are in order.</em></h2>
+    <div class="certs-wrap rv">
+      <div class="certs-viewport">
+        <div class="certs-track" id="certs-track">
+          <div class="cert"><div class="cert-iss">DG Shipping India</div><div class="cert-name">CoC 2nd Mate (Foreign Going)</div><div class="cert-exp">IF 52338 · Oct 2030</div></div>
+          <div class="cert"><div class="cert-iss">DG Shipping India</div><div class="cert-name">GMDSS General Operator Certificate</div><div class="cert-exp">GMDSSDEL25020389 · Sep 2030</div></div>
+          <div class="cert"><div class="cert-iss">DGS Approved MTI</div><div class="cert-name">ECDIS Type-Specific: Maris and Furuno</div><div class="cert-exp gld">Lifetime</div></div>
+          <div class="cert"><div class="cert-iss">CMTN MTI 105023</div><div class="cert-name">Advanced Fire Fighting STCW A-VI/3</div><div class="cert-exp">No expiry</div></div>
+          <div class="cert"><div class="cert-iss">CMTN MTI 105023</div><div class="cert-name">Medical First Aid STCW A-VI/4-1</div><div class="cert-exp">No expiry</div></div>
+          <div class="cert"><div class="cert-iss">DGS Approved MTI</div><div class="cert-name">Passenger Familiarisation STCW V/2</div><div class="cert-exp">No expiry</div></div>
+          <div class="cert"><div class="cert-iss">CMTN MTI 105023</div><div class="cert-name">PSCRB STCW A-VI/2</div><div class="cert-exp">Jun 2030</div></div>
+          <div class="cert"><div class="cert-iss">GEIMS MTI 202009</div><div class="cert-name">Security Designated Duties A-VI/6-2</div><div class="cert-exp">No expiry</div></div>
+          <div class="cert"><div class="cert-iss">ADU Academy India</div><div class="cert-name">PSSR Amendment 2026</div><div class="cert-exp">No expiry</div></div>
+          <div class="cert"><div class="cert-iss">DGS Approved MTI</div><div class="cert-name">ARPA and Radar Operator</div><div class="cert-exp gld">Lifetime</div></div>
+          <div class="cert"><div class="cert-iss">DGS Medical Examiner</div><div class="cert-name">Valid Seafarer Medical Certificate</div><div class="cert-exp">Current, 2026</div></div>
+          <div class="cert"><div class="cert-iss">DG Shipping India</div><div class="cert-name">Continuous Discharge Certificate</div><div class="cert-exp">MUM 463043 · May 2032</div></div>
+        </div>
+      </div>
+      <div class="cert-arrows">
+        <button class="cert-arrow" id="cert-prev" onclick="moveCerts(-1)">&#8592;</button>
+        <button class="cert-arrow" id="cert-next" onclick="moveCerts(1)">&#8594;</button>
+        <div class="cert-progress-wrap">
+          <div class="cert-progress-fill" id="cert-pfill"></div>
+        </div>
+        <div class="cert-counter" id="cert-counter">1 / 12</div>
+      </div>
     </div>
     <div style="margin-top:5rem">
-      <div class="s-tag rv" data-en="Education" data-fr="Formation">Education</div>
-      <h2 class="rv" data-en="First Class.<br><em>With Distinction.</em>" data-fr="Première Classe.<br><em>Avec Mention.</em>">First Class.<br><em>With Distinction.</em></h2>
+      <div class="s-tag rv">Education</div>
+      <h2 class="rv">First Class.<br><em>With Distinction.</em></h2>
       <div class="edu-grid rv">
         <div class="edu-card">
           <div class="edu-score">9.4</div>
-          <div class="edu-score-sub">/10 · <span data-en="First Class with Distinction" data-fr="Première Classe avec Mention">First Class with Distinction</span></div>
+          <div class="edu-score-sub">/10 · First Class with Distinction</div>
           <div class="edu-inst">Indian Maritime University, Chennai</div>
           <div class="edu-deg">B.Sc. Nautical Science · 2021 to 2024</div>
           <span class="mention">Mention Très Bien</span>
         </div>
         <div class="edu-card">
           <div class="edu-score">8.9</div>
-          <div class="edu-score-sub">/10 · <span data-en="Distinction" data-fr="Mention Bien">Distinction</span></div>
+          <div class="edu-score-sub">/10 · Distinction</div>
           <div class="edu-inst">Great Eastern Institute of Maritime Studies</div>
-          <div class="edu-deg" data-en="Higher National Diploma, Nautical Science · 2020 to 2021" data-fr="Diplôme National Supérieur · 2020 à 2021">Higher National Diploma, Nautical Science · 2020 to 2021</div>
+          <div class="edu-deg">Higher National Diploma, Nautical Science · 2020 to 2021</div>
           <span class="mention">Mention Bien</span>
         </div>
       </div>
@@ -668,41 +729,42 @@ footer{
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="contact-bg"></div>
+  <div class="contact-deck"></div>
   <div class="inner contact-grid">
     <div class="rv">
-      <div class="s-tag" style="color:var(--gold2)" data-en="Get in Touch" data-fr="Me Contacter">Get in Touch</div>
-      <h2 class="contact-h" data-en="Available Paris.<br><em>January 2027.</em>" data-fr="Disponible Paris.<br><em>Janvier 2027.</em>">Available Paris.<br><em>January 2027.</em></h2>
+      <div class="s-tag" style="color:var(--gold2)">Get in Touch</div>
+      <h2 class="contact-h">Available Paris.<br><em>January 2027.</em></h2>
       <p class="contact-note">
-        <strong data-en="Work authorisation:" data-fr="Autorisation de travail :">Work authorisation:</strong><br>
-        <span data-en="France Talent Passport, employer-initiated, no labour market test. Netherlands: Kennismigrant, 2 to 4 weeks processing." data-fr="Passeport Talent France, initié par l'employeur, sans test marché. Pays-Bas : Kennismigrant, 2 à 4 semaines.">France Talent Passport, employer-initiated, no labour market test. Netherlands: Kennismigrant, 2 to 4 weeks processing.</span>
+        <strong>Work authorisation:</strong><br>
+        France Talent Passport, employer-initiated, no labour market test required. Netherlands: Kennismigrant, 2 to 4 weeks processing.<br><br>
+        <strong>RIF endorsement:</strong><br>
+        Confirmed by DGAMPA. Indian CoC recognisable under French flag. DFDS France handles this on hire.
       </p>
       <div class="rif">
-        <strong data-en="RIF endorsement confirmed by DGAMPA" data-fr="Endossement RIF confirmé par DGAMPA">RIF endorsement confirmed by DGAMPA</strong><br>
-        <span data-en="Indian CoC recognisable under French flag. Employer submits on hire. DFDS France handles this process." data-fr="Brevet indien reconnaissable sous pavillon français. L'armateur soumet à l'embauche. DFDS France gère ce processus.">Indian CoC recognisable under French flag. Employer submits on hire. DFDS France handles this process.</span>
+        <strong>INDoS: 21NM0652 · CDC: MUM 463043 · CoC: IF 52338</strong><br>
+        All credentials verified and current as of August 2026.
       </div>
     </div>
     <div class="rv">
       <div class="contact-links">
         <a href="mailto:muskaan.sharma14042002@gmail.com" class="cl">
           <div class="cl-icon">✉</div>
-          <div><div>muskaan.sharma14042002@gmail.com</div><div class="cl-sub" data-en="Primary, responses within 24h" data-fr="Principal, réponses sous 24h">Primary, responses within 24h</div></div>
+          <div><div>muskaan.sharma14042002@gmail.com</div><div class="cl-sub">Primary contact, responses within 24 hours</div></div>
         </a>
         <a href="https://wa.me/917069253001" class="cl" target="_blank" rel="noopener">
           <div class="cl-icon">📱</div>
-          <div><div>+91 7069253001</div><div class="cl-sub">WhatsApp · <span data-en="Currently aboard Seaspan Dubai" data-fr="Actuellement à bord Seaspan Dubai">Currently aboard Seaspan Dubai</span></div></div>
+          <div><div>+91 7069253001</div><div class="cl-sub">WhatsApp, currently aboard Seaspan Dubai</div></div>
         </a>
         <a href="tel:+33745644541" class="cl">
           <div class="cl-icon">🇫🇷</div>
-          <div><div>+33 745 644 541</div><div class="cl-sub" data-en="EU contact Paris, fastest response" data-fr="Contact EU Paris, réponse la plus rapide">EU contact Paris, fastest response</div></div>
+          <div><div>+33 745 644 541</div><div class="cl-sub">EU contact in Paris, fastest response</div></div>
         </a>
         <a href="https://www.linkedin.com/in/muskaan-anil-sharma1404" class="cl" target="_blank" rel="noopener">
           <div class="cl-icon" style="font-size:.72rem;font-weight:700">in</div>
-          <div><div>linkedin.com/in/muskaan-anil-sharma1404</div><div class="cl-sub" data-en="Full profile and 12 certifications" data-fr="Profil complet et 12 certifications">Full profile and 12 certifications</div></div>
+          <div><div>linkedin.com/in/muskaan-anil-sharma1404</div><div class="cl-sub">Full profile and all 12 certifications</div></div>
         </a>
         <a href="assets/Muskaan_Sharma_CV.pdf" class="cv-btn" download>
-          <span data-en="Download CV (PDF)" data-fr="Télécharger CV (PDF)">Download CV (PDF)</span>
-          <span>↓</span>
+          <span>Download CV (PDF)</span><span>↓</span>
         </a>
       </div>
     </div>
@@ -711,33 +773,90 @@ footer{
 
 <footer>
   <span>Muskaan Anil Sharma · Officer of the Watch</span>
-  <span data-en="Available Paris, France · January 2027" data-fr="Disponible Paris, France · Janvier 2027">Available Paris, France · January 2027</span>
+  <span>Available Paris, France · January 2027</span>
 </footer>
 
 <script>
-function setLang(lang,btn){
-  document.querySelectorAll('.lb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
-    el.innerHTML=el.getAttribute('data-'+lang);
-  });
-  document.documentElement.lang=lang;
+// SMOOTH SCROLL
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
 }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+
+// SECTIONS
+const sectionIds=['hero','unique','about','voyage','ship','opps','storm','transition','future','credentials','contact'];
+const dots=document.querySelectorAll('.sdot');
+const navLinks=document.querySelectorAll('.nav-links a');
+const topLine=document.getElementById('top-line');
+
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  const total=document.documentElement.scrollHeight-window.innerHeight;
+  topLine.style.width=Math.min(100,(sy/total)*100)+'%';
+
+  let cur=0;
+  sectionIds.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<=100)cur=i;
+  });
+  // dots (10 sections, dots match first 10)
+  dots.forEach((d,i)=>d.classList.toggle('on',i===cur));
+  // nav highlight
+  navLinks.forEach(a=>a.classList.remove('active'));
+  const curId=sectionIds[cur];
+  const activeLink=document.querySelector('.nav-links a[href="#'+curId+'"]');
+  if(activeLink)activeLink.classList.add('active');
+},{passive:true});
+
+// REVEAL
 const obs=new IntersectionObserver((entries)=>{
   entries.forEach((e,i)=>{
     if(e.isIntersecting)setTimeout(()=>e.target.classList.add('in'),i*55);
   });
 },{threshold:.06});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-window.addEventListener('scroll',()=>{
-  const n=document.getElementById('nav');
-  n.style.boxShadow=window.scrollY>40?'0 1px 20px rgba(0,0,0,.08)':'none';
-},{passive:true});
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
-  });
+
+// CERT CAROUSEL
+const CERT_W=211; // cert width + gap
+let certPos=0;
+const TOTAL_CERTS=12;
+const track=document.getElementById('certs-track');
+const pfill=document.getElementById('cert-pfill');
+const counter=document.getElementById('cert-counter');
+
+function getVisible(){
+  const vw=track.parentElement.offsetWidth;
+  return Math.max(1,Math.floor(vw/(CERT_W)));
+}
+function updateCerts(){
+  const vis=getVisible();
+  const maxPos=Math.max(0,TOTAL_CERTS-vis);
+  certPos=Math.max(0,Math.min(certPos,maxPos));
+  track.style.transform=`translateX(-${certPos*CERT_W}px)`;
+  const pct=maxPos>0?(certPos/maxPos)*100:100;
+  pfill.style.width=pct+'%';
+  counter.textContent=(certPos+1)+' / '+TOTAL_CERTS;
+  document.getElementById('cert-prev').style.opacity=certPos===0?'0.3':'1';
+  document.getElementById('cert-next').style.opacity=certPos>=maxPos?'0.3':'1';
+}
+function moveCerts(dir){
+  certPos+=dir;
+  updateCerts();
+}
+updateCerts();
+window.addEventListener('resize',updateCerts,{passive:true});
+
+// MAP popup close on outside click
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.map-wp')){
+    document.querySelectorAll('.map-wp.active').forEach(w=>w.classList.remove('active'));
+  }
 });
 </script>
 </body>
